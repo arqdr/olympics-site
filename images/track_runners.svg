@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0b62d6"/>
+      <stop offset="100%" stop-color="#012a6f"/>
+    </linearGradient>
+    <linearGradient id="track" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#b84032"/>
+      <stop offset="100%" stop-color="#e15a3b"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1200" height="600" fill="url(#sky)"/>
+  <rect x="0" y="260" width="1200" height="260" fill="url(#track)"/>
+  <g stroke="#ffffff" stroke-width="4" opacity="0.8">
+    <line x1="0" y1="290" x2="1200" y2="290"/>
+    <line x1="0" y1="330" x2="1200" y2="330"/>
+    <line x1="0" y1="370" x2="1200" y2="370"/>
+    <line x1="0" y1="410" x2="1200" y2="410"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+  </g>
+  <g fill="#ffffff" opacity="0.95">
+    <path d="M280 340
+             c15 -40 55 -40 70 0
+             l15 40 -25 25 35 40 -20 15 -45 -45 -25 25 -20 -18 30 -32 -20 -40z"/>
+    <path d="M480 350
+             c15 -38 55 -36 68 4
+             l14 38 -24 24 36 40 -18 14 -44 -42 -22 22 -18 -16 28 -30 -20 -38z"/>
+    <path d="M680 360
+             c14 -36 52 -34 65 4
+             l14 36 -22 24 34 38 -18 14 -42 -40 -22 22 -18 -16 26 -30 -19 -34z"/>
+    <path d="M880 350
+             c16 -40 54 -38 70 2
+             l16 40 -26 26 36 40 -20 15 -44 -44 -24 24 -18 -16 30 -32 -20 -40z"/>
+  </g>
+  <text x="600" y="120" text-anchor="middle" fill="#ffffff"
+        font-size="40" font-family="Segoe UI, sans-serif">
+    Олимпийская беговая дорожка
+  </text>
+</svg>

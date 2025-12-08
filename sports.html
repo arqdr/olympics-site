@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Олимпийские виды спорта</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/script.js"></script>
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">Олимпийские игры</div>
+  <nav class="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="history.html">История</a>
+    <a href="sports.html">Виды спорта</a>
+    <a href="countries.html">Страны</a>
+    <a href="gallery.html">Галерея</a>
+  </nav>
+  <div class="navbar-actions">
+    <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+      <span class="theme-toggle__icon">🌙</span>
+    </button>
+    <div class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero hero-sports">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Виды спорта</h1>
+      <p>Летние и зимние дисциплины, входящие в программу Олимпийских игр.</p>
+    </div>
+  </section>
+
+  <section class="section light reveal-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Фильтр по типу спорта</h2>
+      <p class="section-text">
+        Выберите, какие дисциплины показать: все, только летние или только зимние виды спорта.
+      </p>
+      <div class="filter-buttons">
+        <button class="btn small active" data-filter="all" onclick="filterSports('all', this)">Все</button>
+        <button class="btn small" data-filter="summer" onclick="filterSports('summer', this)">Летние</button>
+        <button class="btn small" data-filter="winter" onclick="filterSports('winter', this)">Зимние</button>
+      </div>
+
+      <div class="sports-grid" id="sportsGrid">
+        <article class="sport-card" data-type="summer">
+          <h3>🏃 Лёгкая атлетика</h3>
+          <p>Беговые дисциплины, прыжки и метания — одна из центральных частей летней программы.</p>
+        </article>
+        <article class="sport-card" data-type="summer">
+          <h3>🏊 Плавание</h3>
+          <p>Заплывы на разные дистанции и в разных стилях: баттерфляй, брасс, кроль и на спине.</p>
+        </article>
+        <article class="sport-card" data-type="summer">
+          <h3>🤸 Спортивная гимнастика</h3>
+          <p>Упражнения на снарядах и вольные композиции, сочетающие силу, гибкость и артистизм.</p>
+        </article>
+        <article class="sport-card" data-type="summer">
+          <h3>🥋 Дзюдо</h3>
+          <p>Олимпийский вид единоборств, в котором важны техника, тактика и уважение к сопернику.</p>
+        </article>
+        <article class="sport-card" data-type="winter">
+          <h3>⛸ Фигурное катание</h3>
+          <p>Одиночные и парные выступления, а также танцы на льду под музыку.</p>
+        </article>
+        <article class="sport-card" data-type="winter">
+          <h3>⛷ Лыжные гонки</h3>
+          <p>Соревнования на длинные дистанции по снегу в классическом и свободном стиле.</p>
+        </article>
+        <article class="sport-card" data-type="winter">
+          <h3>🏒 Хоккей с шайбой</h3>
+          <p>Командная игра на льду, одна из самых зрелищных дисциплин зимних Олимпийских игр.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt reveal-on-scroll">
+    <div class="container two-column">
+      <div>
+        <h2 class="section-title">Новые дисциплины</h2>
+        <p class="section-text">
+          В программу Игр постепенно включают новые виды спорта, ориентированные на молодёжную аудиторию.
+          Среди них — скейтбординг, серфинг, BMX-фристайл, спортивное скалолазание.
+        </p>
+        <p class="section-text">
+          Это помогает Олимпийскому движению оставаться актуальным и отражать изменения в спортивной культуре.
+        </p>
+      </div>
+      <div class="image-box">
+        <img src="https://images.pexels.com/photos/3699921/pexels-photo-3699921.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Современные виды спорта" />
+      </div>
+    </div>
+  </section>
+</main>
+
+<button id="toTop" title="Наверх">↑</button>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2025 Олимпийские игры — курсовая работа</p>
+    <p class="footer-note">Раздел «Виды спорта».</p>
+  </div>
+</footer>
+</body>
+</html>

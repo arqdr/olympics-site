@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Страны-участники Олимпийских игр</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/script.js"></script>
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">Олимпийские игры</div>
+  <nav class="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="history.html">История</a>
+    <a href="sports.html">Виды спорта</a>
+    <a href="countries.html">Страны</a>
+    <a href="gallery.html">Галерея</a>
+  </nav>
+  <div class="navbar-actions">
+    <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+      <span class="theme-toggle__icon">🌙</span>
+    </button>
+    <div class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero hero-countries">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Страны-участники</h1>
+      <p>Олимпийские игры собирают спортсменов более чем из двухсот государств мира.</p>
+    </div>
+  </section>
+
+  <section class="section light reveal-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Лидеры медального зачёта</h2>
+      <p class="section-text">
+        Примерная статистика по суммарному количеству медалей на летних Олимпийских играх.
+        Таблицу можно отсортировать по каждому столбцу.
+      </p>
+      <div class="table-wrapper">
+        <table class="medal-table" id="medalTable">
+          <thead>
+            <tr>
+              <th onclick="sortTable(0)">Страна</th>
+              <th onclick="sortTable(1)">Золото</th>
+              <th onclick="sortTable(2)">Серебро</th>
+              <th onclick="sortTable(3)">Бронза</th>
+              <th onclick="sortTable(4)">Всего</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>🇺🇸 США</td><td>1209</td><td>991</td><td>870</td><td>3070</td></tr>
+            <tr><td>🇨🇳 Китай</td><td>327</td><td>256</td><td>216</td><td>799</td></tr>
+            <tr><td>🇯🇵 Япония</td><td>206</td><td>188</td><td>223</td><td>617</td></tr>
+            <tr><td>🇬🇧 Великобритания</td><td>312</td><td>344</td><td>356</td><td>1012</td></tr>
+            <tr><td>🇩🇪 Германия</td><td>317</td><td>316</td><td>321</td><td>954</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="section-text small">
+        Данные основаны на открытых источниках и приведены для учебных целей.
+      </p>
+    </div>
+  </section>
+
+  <section class="section alt reveal-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Краткие характеристики стран</h2>
+      <div class="country-grid">
+        <article class="country-card">
+          <h3>🇺🇸 США</h3>
+          <p>Лидер медального зачёта. Сильные стороны — лёгкая атлетика, плавание, баскетбол и спортивная гимнастика.</p>
+        </article>
+        <article class="country-card">
+          <h3>🇨🇳 Китай</h3>
+          <p>Сильные позиции в гимнастике, прыжках в воду, настольном теннисе и тяжёлой атлетике.</p>
+        </article>
+        <article class="country-card">
+          <h3>🇯🇵 Япония</h3>
+          <p>Родина дзюдо, успешно выступающая также в борьбе, плавании и командных видах спорта.</p>
+        </article>
+        <article class="country-card">
+          <h3>🇬🇧 Великобритания</h3>
+          <p>Лидер в велоспорте, гребле и лёгкой атлетике. Принимала Олимпиаду в Лондоне в 2012 году.</p>
+        </article>
+        <article class="country-card">
+          <h3>🇩🇪 Германия</h3>
+          <p>Сильна как в летних, так и в зимних дисциплинах: биатлон, гребля, велоспорт, конный спорт.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light reveal-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Визуальная диаграмма</h2>
+      <p class="section-text">
+        Условная диаграмма, показывающая относительное количество всех медалей. Высота столбца соответствует сумме наград.
+      </p>
+      <div class="bar-chart">
+<div class="bar"><div class="bar-fill" style="height:260px"></div><span>США</span></div>
+<div class="bar"><div class="bar-fill" style="height:67px"></div><span>Китай</span></div>
+<div class="bar"><div class="bar-fill" style="height:52px"></div><span>Япония</span></div>
+<div class="bar"><div class="bar-fill" style="height:86px"></div><span>Великобритания</span></div>
+<div class="bar"><div class="bar-fill" style="height:80px"></div><span>Германия</span></div>
+</div></section>
+</main>
+
+<button id="toTop" title="Наверх">↑</button>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2025 Олимпийские игры — курсовая работа</p>
+    <p class="footer-note">Раздел «Страны».</p>
+  </div>
+</footer>
+</body>
+</html>

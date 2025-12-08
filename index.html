@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Олимпийские игры – Главная</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/script.js"></script>
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">Олимпийские игры</div>
+  <nav class="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="history.html">История</a>
+    <a href="sports.html">Виды спорта</a>
+    <a href="countries.html">Страны</a>
+    <a href="gallery.html">Галерея</a>
+  </nav>
+  <div class="navbar-actions">
+    <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+      <span class="theme-toggle__icon">🌙</span>
+    </button>
+    <div class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero hero-home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Олимпийские игры</h1>
+      <p>Международное спортивное движение, объединяющее спортсменов и зрителей со всей планеты.</p>
+      <div class="hero-buttons">
+        <a href="history.html" class="btn primary">Начать с истории</a>
+        <a href="#symbols" class="btn secondary">Символика игр</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-strip reveal-on-scroll">
+    <div class="container stats-inner">
+      <div class="stat-item">
+        <span class="stat-number">2800+</span>
+        <span class="stat-label">лет истории</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">200+</span>
+        <span class="stat-label">стран-участников</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">40+</span>
+        <span class="stat-label">олимпийских видов спорта</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light reveal-on-scroll">
+    <div class="container">
+      <h2 class="section-title">О сайте</h2>
+      <p class="section-text">
+        Сайт подготовлен в рамках курсовой работы по веб-разработке и посвящён Олимпийским играм:
+        их истории, видам спорта, странам-участницам и ярким моментам.
+      </p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>История</h3>
+          <p>От состязаний в Олимпии до крупнейшего спортивного события современности.</p>
+          <a href="history.html" class="link-more">Перейти в раздел →</a>
+        </article>
+        <article class="feature-card">
+          <h3>Виды спорта</h3>
+          <p>Краткий обзор основных олимпийских дисциплин: летних и зимних.</p>
+          <a href="sports.html" class="link-more">Перейти в раздел →</a>
+        </article>
+        <article class="feature-card">
+          <h3>Страны</h3>
+          <p>Лидеры медального зачёта и их сильные стороны.</p>
+          <a href="countries.html" class="link-more">Перейти в раздел →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="symbols" class="section alt reveal-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Символика Олимпийских игр</h2>
+      <div class="feature-grid symbols-grid">
+        <article class="feature-card">
+          <h3>Олимпийские кольца</h3>
+          <p>Пять колец символизируют единство пяти частей света и объединение спортсменов мира.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Олимпийский огонь</h3>
+          <p>Огонь зажигают в Олимпии, затем он путешествует по странам и прибывает на стадион открытия Игр.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Девиз</h3>
+          <p><em>«Быстрее, выше, сильнее — вместе»</em> подчёркивает и личные достижения, и идею сотрудничества.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark reveal-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Интересные факты</h2>
+      <div class="facts-grid">
+        <article class="fact-card">
+          <h3>Эстафета огня</h3>
+          <p>Маршрут эстафеты может проходить через десятки городов и охватывать тысячи километров.</p>
+        </article>
+        <article class="fact-card">
+          <h3>Телетрансляции</h3>
+          <p>Середина XX века превратила Олимпиады в глобальное телевизионное событие.</p>
+        </article>
+        <article class="fact-card">
+          <h3>Новые дисциплины</h3>
+          <p>Скейтбординг, серфинг и спортивное скалолазание — примеры современных добавлений в программу.</p>
+        </article>
+        <article class="fact-card">
+          <h3>Культурный диалог</h3>
+          <p>Игры дают возможность странам представить культуру и традиции на открытии и закрытии.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+<section class="live-facts-section reveal">
+  <h2 class="section-title">Интересные факты об Олимпийских играх</h2>
+  <p class="live-facts-subtitle">
+    Эти карточки создаются динамически на JavaScript — пример «живого» контента.
+  </p>
+  <div class="live-facts-grid" id="liveFacts"></div>
+</section>
+
+</main>
+
+<button id="toTop" title="Наверх">↑</button>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2025 Олимпийские игры — курсовая работа</p>
+    <p class="footer-note">Материал подготовлен в учебных целях.</p>
+  </div>
+</footer>
+</body>
+</html>
