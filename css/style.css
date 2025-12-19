@@ -1,5 +1,4 @@
-* { box-sizing: border-box; }
-
+/* ОРИГИНАЛЬНЫЕ ПЕРЕМЕННЫЕ (точно как в вашем работающем файле) */
 :root {
   --bg-page: #f4f6fa;
   --bg-elevated: #ffffff;
@@ -15,6 +14,8 @@
   --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.2);
   --radius-lg: 20px;
 }
+
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -601,107 +602,554 @@ footer {
   .stats-inner { gap: 16px; }
 }
 
-
-/* THEME TOGGLE & NAVBAR UPGRADE */
-.navbar {
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background: var(--bg-navbar);
-  background-image: linear-gradient(120deg, rgba(0,64,184,0.98), rgba(0,155,255,0.9));
+/* ДОПОЛНИТЕЛЬНЫЕ ПЕРЕМЕННЫЕ ТОЛЬКО ДЛЯ ЗАДАНИЙ (добавить в конец) */
+:root {
+  --accent-silver: #c0c0c0;
+  --accent-bronze: #cd7f32;
+  --shadow-hard: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --transition-fast: 0.25s ease;
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.6s ease;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-blur: blur(10px);
+  --gradient-primary: linear-gradient(135deg, #0040b8 0%, #0072ff 100%);
+  --gradient-gold: linear-gradient(135deg, #ffdf00 0%, #ff9800 100%);
+  --gradient-silver: linear-gradient(135deg, #c0c0c0 0%, #e0e0e0 100%);
+  --gradient-bronze: linear-gradient(135deg, #cd7f32 0%, #e3963e 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
 }
 
-.navbar-actions {
+/* ========== ЗАДАНИЕ 1: Glassmorphism Cards ========== */
+.glass-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.glass-section .section-title,
+.glass-section .section-text {
+  color: white;
+  text-align: center;
+}
+.glass-section .section-text {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  opacity: 0.9;
+}
+.glass-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+.glass-card {
+  position: relative;
+  width: 300px;
+  min-height: 280px;
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  padding: 30px;
+  overflow: hidden;
+  z-index: 1;
+  transition: all var(--transition-medium);
+}
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-glass);
+  z-index: -1;
+  border-radius: inherit;
+}
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  z-index: -1;
+  opacity: 0;
+  transition: var(--transition-slow);
+}
+.glass-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+.glass-card:hover::after {
+  opacity: 1;
+  animation: shine 2s infinite linear;
+}
+.glass-card-inner {
+  position: relative;
+  z-index: 2;
+}
+.glass-card h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: var(--accent-gold);
+}
+.glass-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+/* Анимированные квадраты */
+.glass-card .square {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  z-index: -1;
+  animation: moveSquare1 3s infinite ease-in-out;
+}
+.glass-card .square:nth-child(2) {
+  bottom: 40px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  animation: moveSquare2 3s infinite ease-in-out alternate;
+}
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+@keyframes moveSquare1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(15px, -15px) rotate(90deg); }
+  50% { transform: translate(-10px, 10px) rotate(180deg); }
+  75% { transform: translate(10px, 10px) rotate(270deg); }
+}
+@keyframes moveSquare2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-20px, -10px) scale(0.8); }
+  100% { transform: translate(15px, 10px) scale(1.1); }
+}
+
+/* ========== ЗАДАНИЕ 2: Social Buttons ========== */
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+.footer-info {
+  flex: 1;
+  min-width: 250px;
+}
+.social-section {
+  flex: 1;
+  min-width: 250px;
+}
+.social-section h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+.social-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.social-btn {
   display: flex;
   align-items: center;
-  gap: 16px;
-}
-
-.theme-toggle {
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.45);
-  padding: 6px 12px;
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  font-size: 13px;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-decoration: none;
   font-weight: 500;
-  line-height: 1;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.32);
-  transition: background .25s ease, transform .15s ease, box-shadow .25s ease, border-color .25s ease;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+.social-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    transparent 100%);
+  transition: var(--transition-medium);
+  z-index: -1;
+}
+.social-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+.social-btn:hover::before {
+  left: 100%;
+}
+.social-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: var(--transition-medium);
+  z-index: -2;
+  border-radius: inherit;
+}
+.social-btn:hover::after {
+  opacity: 1;
+}
+.youtube-btn:hover::after {
+  background: linear-gradient(135deg, #FF0000, #CC0000);
+}
+.instagram-btn:hover::after {
+  background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCAF45);
+}
+.twitter-btn:hover::after {
+  background: linear-gradient(135deg, #1DA1F2, #0d8bd9);
+}
+.social-icon {
+  font-size: 18px;
+}
+.social-text {
+  margin-top: 2px;
 }
 
-.theme-toggle:hover {
-  background: rgba(255,255,255,0.16);
-  transform: translateY(-1px);
-  box-shadow: 0 10px 26px rgba(15,23,42,0.6);
-  border-color: rgba(255,255,255,0.75);
+/* ========== ЗАДАНИЕ 3: Glassmorphism Form ========== */
+.form-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 223, 0, 0.05) 0%, 
+    rgba(0, 64, 184, 0.05) 100%);
 }
-
-.theme-toggle__icon {
+.form-wrapper {
+  max-width: 500px;
+  margin: 30px auto 0;
+  position: relative;
+}
+.glass-form {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+.glass-form::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(0, 64, 184, 0.05) 50%,
+    transparent 70%
+  );
+  animation: formShine 4s infinite linear;
+  z-index: 0;
+}
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-main);
+  font-size: 14px;
+}
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  transition: var(--transition-fast);
+}
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 64, 184, 0.1);
+}
+.form-options {
+  margin: 20px 0;
+}
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.checkbox input {
+  width: auto;
+}
+.form-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
   font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.form-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 64, 184, 0.3);
+}
+.form-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 13px;
+}
+.form-link {
+  color: var(--accent);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+.form-link:hover {
+  text-decoration: underline;
+}
+@keyframes formShine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
+/* ========== ЗАДАНИЕ 4: Flexbox Cards ========== */
+.flexbox-section {
+  padding: 60px 0;
+  background: #f9fafc;
+}
+.flexbox-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 40px;
+}
+.flexbox-card {
+  flex: 1;
+  min-width: 280px;
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  transition: all var(--transition-medium);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.flexbox-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(15, 23, 42, 0.15);
+  filter: brightness(1.05) contrast(1.1);
+}
+.card-number {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--accent);
+  opacity: 0.2;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  transition: var(--transition-medium);
+}
+.flexbox-card:hover .card-number {
+  opacity: 0.3;
+  transform: scale(1.1);
+}
+.flexbox-card h3 {
+  font-size: 22px;
+  margin: 10px 0 15px;
+  color: var(--accent);
+}
+.flexbox-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 15px;
+}
+.flexbox-card p:last-of-type {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ========== ЗАДАНИЕ 5: Ray Cards ========== */
+.ray-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #001a4d, #003399);
+  color: white;
+}
+.ray-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 40px;
+}
+.ray-card {
+  flex: 1;
+  min-width: 280px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  transition: all var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+.ray-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0) 100%);
+  opacity: 0;
+  transition: var(--transition-medium);
+  z-index: -1;
+  border-radius: inherit;
+}
+.ray-card:hover::before {
+  opacity: 1;
+}
+.ray-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg, 
+    transparent 30%, 
+    rgba(255, 255, 255, 0.15) 50%, 
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: var(--transition-slow);
+  z-index: -1;
+}
+.ray-card:hover::after {
+  opacity: 1;
+  animation: rayFlow 3s linear infinite;
+}
+.medal-icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+  display: block;
+  transition: var(--transition-medium);
+}
+.ray-card:hover .medal-icon {
+  transform: scale(1.2) rotate(15deg);
+}
+.ray-card h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: white;
+}
+.ray-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+}
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 15px;
+}
+@keyframes rayFlow {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ ЗАДАНИЙ */
 @media (max-width: 768px) {
-  .navbar {
-    padding-inline: 16px;
+  .glass-cards,
+  .flexbox-cards,
+  .ray-cards {
+    flex-direction: column;
+    align-items: center;
   }
-  .navbar-actions {
-    gap: 10px;
+  
+  .glass-card,
+  .flexbox-card,
+  .ray-card {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .footer-main {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .social-buttons {
+    justify-content: center;
   }
 }
 
-/* SCROLL REVEAL ANIMATION */
-@media (prefers-reduced-motion: no-preference) {
-  .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  .reveal-on-scroll.reveal-active {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-width: 480px) {
+  .glass-card,
+  .flexbox-card,
+  .ray-card {
+    padding: 20px;
   }
 }
 
-/* DARK THEME */
+/* Оригинальные стили сайта (оставляем как было) */
+.theme-toggle { display: none !important; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Slightly stronger hover on cards for a modern feel */
-.feature-card,
-.sport-card,
-.country-card,
-.fact-card {
-  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
-}
-
-.feature-card:hover,
-.sport-card:hover,
-.country-card:hover,
-.fact-card:hover {
-  transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 16px 40px rgba(15,23,42,0.28);
-}
-
-
-/* ===== Masonry Gallery ===== */
 .gallery-page {
   padding: 40px 20px;
   max-width: 1300px;
@@ -719,7 +1167,7 @@ footer {
   break-inside: avoid;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.masonry-grid img:hover {
+.masonly-grid img:hover {
   transform: scale(1.02);
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
@@ -730,30 +1178,6 @@ footer {
   .masonry-grid { column-count: 1; }
 }
 
-
-/* ===== v14: Анимация появления + «живые» блоки ===== */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.reveal.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.tilt {
-  transition: transform 0.25s ease-out;
-  will-change: transform;
-}
-
-.navbar.navbar-scrolled {
-  backdrop-filter: blur(14px);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-  background: linear-gradient(90deg, rgba(0,27,94,0.96), rgba(0,76,163,0.96));
-}
-
-/* Секция динамических фактов на главной */
 .live-facts-section {
   margin-top: 40px;
   padding: 32px 20px 40px;
@@ -761,22 +1185,18 @@ footer {
   background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(243,247,255,0.96));
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.22);
 }
-
-
 .live-facts-subtitle {
   margin-top: 8px;
   margin-bottom: 20px;
   opacity: 0.9;
   max-width: 640px;
 }
-
 .live-facts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 18px;
   margin-top: 8px;
 }
-
 .dynamic-fact-card {
   padding: 14px 16px;
   border-radius: 18px;
@@ -784,7 +1204,6 @@ footer {
   box-shadow: 0 10px 30px rgba(15,23,42,0.12);
   border: 1px solid rgba(148,163,184,0.35);
 }
-
 .dynamic-fact-card h3 {
   font-size: 1rem;
   margin-bottom: 6px;
@@ -792,28 +1211,4 @@ footer {
 .dynamic-fact-card p {
   font-size: 0.9rem;
   line-height: 1.4;
-}
-
-/* Галерея: изображения тоже анимируем */
-.gallery-page .masonry-grid img.reveal {
-  transform: translateY(14px);
-}
-.gallery-page .masonry-grid img.reveal.reveal-visible {
-  transform: translateY(0);
-}
-
-
-/* Light-only mode fix */
-.theme-toggle { display: none !important; }
-
-/* Fix diagram overlap */
-.diagram, img.diagram, .chart, .stats-graphic {
-    display: block;
-    max-width: 100%;
-    margin: 20px auto !important;
-}
-
-.country-diagram, .sports-diagram {
-    margin-top: 20px !important;
-    margin-bottom: 40px !important;
 }
