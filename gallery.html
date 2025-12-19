@@ -5,11 +5,197 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Галерея — Олимпийские игры</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Дополнительные стили для мозаичной галереи */
+    .gallery-page {
+      padding: 40px 20px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #0040b8;
+      font-size: 32px;
+    }
+    
+    .page-subtitle {
+      text-align: center;
+      margin-bottom: 60px;
+      color: #666;
+      font-size: 18px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+    
+    /* Мозаичная галерея с Grid */
+    .masonry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-auto-rows: 200px;
+      grid-gap: 20px;
+      grid-auto-flow: dense;
+    }
+    
+    .masonry-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+    }
+    
+    /* Разные размеры для элементов (как в примере) */
+    .masonry-item:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    
+    .masonry-item:nth-child(4) {
+      grid-column: span 2;
+    }
+    
+    .masonry-item:nth-child(6) {
+      grid-row: span 2;
+    }
+    
+    .masonry-item:nth-child(8) {
+      grid-column: span 2;
+    }
+    
+    .masonry-item:nth-child(10) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    
+    .masonry-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    /* Наложение с текстом */
+    .item-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.5) 30%,
+        rgba(0, 0, 0, 0) 60%
+      );
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .item-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      transform: translateY(20px);
+      transition: transform 0.4s ease;
+    }
+    
+    .item-description {
+      font-size: 14px;
+      opacity: 0.9;
+      transform: translateY(20px);
+      transition: transform 0.4s ease 0.1s;
+      line-height: 1.4;
+    }
+    
+    /* Анимация при наведении */
+    .masonry-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+    
+    .masonry-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .masonry-item:hover .item-overlay {
+      opacity: 1;
+    }
+    
+    .masonry-item:hover .item-title,
+    .masonry-item:hover .item-description {
+      transform: translateY(0);
+    }
+    
+    /* Эффект свечения при наведении */
+    .masonry-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 12px;
+      background: linear-gradient(
+        45deg,
+        rgba(255, 215, 0, 0.3) 0%,
+        rgba(0, 100, 255, 0.3) 100%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .masonry-item:hover::before {
+      opacity: 0.6;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .masonry-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-auto-rows: 180px;
+        grid-gap: 15px;
+      }
+      
+      .masonry-item:nth-child(1),
+      .masonry-item:nth-child(4),
+      .masonry-item:nth-child(6),
+      .masonry-item:nth-child(8),
+      .masonry-item:nth-child(10) {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .masonry-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 250px;
+      }
+      
+      .page-title {
+        font-size: 26px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="navbar">
-    <a href="index.html" class="logo">Олимпийские игры</a>
-    <nav>
+    <div class="logo">Олимпийские игры</div>
+    <nav class="nav-links">
       <a href="index.html">Главная</a>
       <a href="history.html">История</a>
       <a href="sports.html">Виды спорта</a>
@@ -17,29 +203,248 @@
       <a href="gallery.html" class="active">Галерея</a>
     </nav>
     <div class="navbar-actions">
-      <button id="themeToggle" class="theme-toggle">🌙</button>
-      <button class="burger" id="burgerBtn">☰</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+        <span class="theme-toggle__icon">🌙</span>
+      </button>
+      <div class="burger" id="burger">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </header>
 
   <main class="gallery-page">
-    <h1 class="page-title">Галерея Олимпийских игр</h1>
+    <h1 class="page-title">Мозаичная галерея Олимпийских игр</h1>
+    <p class="page-subtitle">Захватывающие моменты величайшего спортивного события планеты. Яркие эмоции, невероятные достижения и история, написанная лучшими атлетами мира.</p>
+    
+    <!-- Мозаичная галерея -->
     <div class="masonry-grid">
-      <img src="images/gallery/img_01.avif" alt="Olympic image 1">
-      <img src="images/gallery/img_02.avif" alt="Olympic image 2">
-      <img src="images/gallery/img_03.avif" alt="Olympic image 3">
-      <img src="images/gallery/img_04.avif" alt="Olympic image 4">
-      <img src="images/gallery/img_05.avif" alt="Olympic image 5">
-      <img src="images/gallery/img_06.avif" alt="Olympic image 6">
-      <img src="images/gallery/img_07.avif" alt="Olympic image 7">
-      <img src="images/gallery/img_08.avif" alt="Olympic image 8">
-      <img src="images/gallery/img_09.avif" alt="Olympic image 9">
-      <img src="images/gallery/img_10.avif" alt="Olympic image 10">
-      <img src="images/gallery/img_11.avif" alt="Olympic image 11">
-      <img src="images/gallery/img_12.avif" alt="Olympic image 12">
+      <!-- Элемент 1 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_01.avif" alt="Торжественное открытие Олимпийских игр">
+        <div class="item-overlay">
+          <div class="item-title">Красивое фото</div>
+          <div class="item-description">Спортсмен словно парит над водой</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 2 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_02.avif" alt="Спринтер на финишной прямой">
+        <div class="item-overlay">
+          <div class="item-title">Мгновение перед финалом</div>
+          <div class="item-description">Велосипедисты на финише</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 3 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_03.avif" alt="Пловец в бассейне">
+        <div class="item-overlay">
+          <div class="item-title">Сальто</div>
+          <div class="item-description">Бойцы показывают технику</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 4 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_04.avif" alt="Олимпийский стадион ночью">
+        <div class="item-overlay">
+          <div class="item-title">Знаменитый стрелок</div>
+          <div class="item-description">Прославившийся в соцсетях мужчина</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 5 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_05.avif" alt="Гимнаст на брусьях">
+        <div class="item-overlay">
+          <div class="item-title">Эйфелева башня</div>
+          <div class="item-description">Воллейбол на фоне Эйфелевой башни</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 6 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_06.avif" alt="Баскетболист в прыжке">
+        <div class="item-overlay">
+          <div class="item-title">Победа</div>
+          <div class="item-description">Спортсменка с медалью</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 7 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_07.avif" alt="Прыгун в воду">
+        <div class="item-overlay">
+          <div class="item-title">Неподдельные эмоции</div>
+          <div class="item-description">Живое фото с олимпиады</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 8 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_08.avif" alt="Вручение олимпийских медалей">
+        <div class="item-overlay">
+          <div class="item-title">Золотой момент</div>
+          <div class="item-description">Церемония награждения — кульминация многолетних тренировок и усилий</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 9 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_09.avif" alt="Олимпийская деревня">
+        <div class="item-overlay">
+          <div class="item-title">Дом чемпионов</div>
+          <div class="item-description">Олимпийская деревня — место, где живут и общаются атлеты со всего мира</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 10 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_10.avif" alt="Фигуристка на льду">
+        <div class="item-overlay">
+          <div class="item-title">Танец на воде</div>
+          <div class="item-description">Сёрфинг — одно из самых элегантных и зрелищных соревнований</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 11 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_11.avif" alt="Волейболист в игре">
+        <div class="item-overlay">
+          <div class="item-title">Какой шпагат</div>
+          <div class="item-description">Это гимнастика</div>
+        </div>
+      </div>
+      
+      <!-- Элемент 12 -->
+      <div class="masonry-item">
+        <img src="images/gallery/img_12.avif" alt="Фейерверк на закрытии Игр">
+        <div class="item-overlay">
+          <div class="item-title">Командный дух</div>
+          <div class="item-description">Волейбол демонстрирует важность слаженной работы и взаимопонимания</div>
+        </div>
+      </div>
     </div>
   </main>
 
-  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Лайтбокс для просмотра изображений
+      const lightbox = document.createElement('div');
+      lightbox.className = 'lightbox';
+      lightbox.innerHTML = `
+        <div class="lightbox-content">
+          <span class="lightbox-close">&times;</span>
+          <img class="lightbox-img" src="" alt="">
+          <div class="lightbox-caption"></div>
+        </div>
+      `;
+      document.body.appendChild(lightbox);
+      
+      const lightboxImg = lightbox.querySelector('.lightbox-img');
+      const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+      const lightboxClose = lightbox.querySelector('.lightbox-close');
+      
+      // Открытие лайтбокса при клике на изображение
+      const galleryItems = document.querySelectorAll('.masonry-item');
+      
+      galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const img = this.querySelector('img');
+          const title = this.querySelector('.item-title').textContent;
+          const description = this.querySelector('.item-description').textContent;
+          
+          lightboxImg.src = img.src;
+          lightboxCaption.innerHTML = `<h3>${title}</h3><p>${description}</p>`;
+          lightbox.style.display = 'flex';
+        });
+      });
+      
+      // Закрытие лайтбокса
+      lightboxClose.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+      });
+      
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          lightbox.style.display = 'none';
+        }
+      });
+      
+      // Добавляем стили для лайтбокса
+      const style = document.createElement('style');
+      style.textContent = `
+        .lightbox {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.95);
+          display: none;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+          padding: 20px;
+        }
+        
+        .lightbox-content {
+          max-width: 90%;
+          max-height: 90%;
+          position: relative;
+        }
+        
+        .lightbox-img {
+          max-width: 100%;
+          max-height: 70vh;
+          display: block;
+          border-radius: 8px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-caption {
+          color: white;
+          text-align: center;
+          margin-top: 20px;
+          padding: 15px;
+          background: rgba(0, 0, 0, 0.7);
+          border-radius: 8px;
+        }
+        
+        .lightbox-caption h3 {
+          margin: 0 0 10px 0;
+          color: #ffd700;
+        }
+        
+        .lightbox-caption p {
+          margin: 0;
+          line-height: 1.5;
+        }
+        
+        .lightbox-close {
+          position: absolute;
+          top: -45px;
+          right: -10px;
+          color: white;
+          font-size: 35px;
+          cursor: pointer;
+          background: rgba(0, 0, 0, 0.6);
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.3s;
+        }
+        
+        .lightbox-close:hover {
+          background: rgba(255, 215, 0, 0.8);
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
 </body>
 </html>
