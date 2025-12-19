@@ -19,10 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-
-  // переключатель темы временно отключён
-
-// анимация появления блоков
+  // анимация появления блоков
   const revealElems = document.querySelectorAll('.reveal-on-scroll');
   if ('IntersectionObserver' in window && revealElems.length) {
     const observer = new IntersectionObserver((entries) => {
@@ -38,26 +35,66 @@ document.addEventListener('DOMContentLoaded', function () {
     revealElems.forEach(el => el.classList.add('reveal-active'));
   }
 
-  // лайтбокс
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxClose = document.getElementById('lightboxClose');
-  const zoomables = document.querySelectorAll('.zoomable');
-
-  if (lightbox && lightboxImg && zoomables.length) {
-    zoomables.forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.style.display = 'flex';
-      });
+  // обработка формы
+  const glassForm = document.querySelector('.glass-form');
+  if (glassForm) {
+    glassForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Спасибо за регистрацию! Проверьте вашу почту для подтверждения.');
+      glassForm.reset();
     });
   }
-  if (lightbox && lightboxClose) {
-    lightboxClose.addEventListener('click', () => {
-      lightbox.style.display = 'none';
+
+  // анимация для социальных кнопок
+  const socialBtns = document.querySelectorAll('.social-btn');
+  socialBtns.forEach(btn => {
+    btn.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-3px) scale(1.05)';
     });
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) lightbox.style.display = 'none';
+    
+    btn.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0) scale(1)';
+    });
+  });
+
+  // динамические факты
+  const factsRoot = document.getElementById("liveFacts");
+  if (factsRoot) {
+    const facts = [
+      {
+        title: "Афины, 1896",
+        text: "Первые современные Олимпийские игры прошли в Афинах и собрали 14 стран-участниц."
+      },
+      {
+        title: "Олимпийский девиз",
+        text: "Девиз «Быстрее, выше, сильнее — вместе» был обновлён в 2021 году, подчеркнув идею единства."
+      },
+      {
+        title: "Зимние Игры",
+        text: "Первые Зимние Олимпийские игры состоялись в 1924 году во Франции, в городе Шамони."
+      },
+      {
+        title: "Олимпийский огонь",
+        text: "Огонь зажигают в Олимпии (Греция), после чего эстафета переносит его в город-хозяин Игр."
+      },
+      {
+        title: "Пять колец",
+        text: "Пять переплетённых колец символизируют единство пяти заселённых частей света."
+      },
+      {
+        title: "Новые виды спорта",
+        text: "В программу Игр регулярно добавляют новые дисциплины: скейтбординг, серфинг, брейк-данс и другие."
+      }
+    ];
+
+    facts.forEach((fact) => {
+      const card = document.createElement("article");
+      card.className = "dynamic-fact-card tilt reveal";
+      card.innerHTML = `
+        <h3>${fact.title}</h3>
+        <p>${fact.text}</p>
+      `;
+      factsRoot.appendChild(card);
     });
   }
 });
@@ -102,129 +139,3 @@ function sortTable(colIndex) {
 
   rows.forEach(r => tbody.appendChild(r));
 }
-
-// слайдер
-let currentSlide = 0;
-function changeSlide(step) {
-  const slider = document.getElementById('slider');
-  if (!slider) return;
-  const slides = slider.querySelectorAll('.slide');
-  if (!slides.length) return;
-  currentSlide = (currentSlide + step + slides.length) % slides.length;
-  slides.forEach((slide, index) => {
-    slide.classList.toggle('active', index === currentSlide);
-  });
-}
-
-
-
-// v14: «оживление» сайта — анимации, динамические блоки, лёгкий 3D-hover
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. Header реагирует на скролл
-  const navbar = document.querySelector(".navbar");
-  const onScroll = () => {
-    if (!navbar) return;
-    if (window.scrollY > 32) {
-      navbar.classList.add("navbar-scrolled");
-    } else {
-      navbar.classList.remove("navbar-scrolled");
-    }
-  };
-  window.addEventListener("scroll", onScroll);
-  onScroll();
-
-  // 2. Назначаем .reveal и .tilt типичным блокам
-  const autoRevealSelectors = [
-    ".hero",
-    ".hero-card",
-    ".feature-card",
-    ".sport-card",
-    ".country-card",
-    ".fact-card",
-    ".gallery-page .masonry-grid img"
-  ];
-  autoRevealSelectors.forEach(sel => {
-    document.querySelectorAll(sel).forEach(el => el.classList.add("reveal"));
-  });
-
-  const autoTiltSelectors = [
-    ".feature-card",
-    ".sport-card"
-  ];
-  autoTiltSelectors.forEach(sel => {
-    document.querySelectorAll(sel).forEach(el => el.classList.add("tilt"));
-  });
-
-  // 3. IntersectionObserver для плавного появления
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("reveal-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-
-  // 4. Лёгкий 3D-hover для элементов с .tilt
-  document.querySelectorAll(".tilt").forEach(card => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      const rotateX = (-y / 24).toFixed(2);
-      const rotateY = (x / 24).toFixed(2);
-      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-    });
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
-    });
-  });
-
-  // 5. Динамический блок фактов на главной (пример «подгрузки» контента через JS)
-  const factsRoot = document.getElementById("liveFacts");
-  if (factsRoot) {
-    const facts = [
-      {
-        title: "Афины, 1896",
-        text: "Первые современные Олимпийские игры прошли в Афинах и собрали 14 стран-участниц."
-      },
-      {
-        title: "Олимпийский девиз",
-        text: "Девиз «Быстрее, выше, сильнее — вместе» был обновлён в 2021 году, подчеркнув идею единства."
-      },
-      {
-        title: "Зимние Игры",
-        text: "Первые Зимние Олимпийские игры состоялись в 1924 году во Франции, в городе Шамони."
-      },
-      {
-        title: "Олимпийский огонь",
-        text: "Огонь зажигают в Олимпии (Греция), после чего эстафета переносит его в город-хозяин Игр."
-      },
-      {
-        title: "Пять колец",
-        text: "Пять переплетённых колец символизируют единство пяти заселённых частей света."
-      },
-      {
-        title: "Новые виды спорта",
-        text: "В программу Игр регулярно добавляют новые дисциплины: скейтбординг, серфинг, брейк-данс и другие."
-      }
-    ];
-
-    facts.forEach((fact) => {
-      const card = document.createElement("article");
-      card.className = "dynamic-fact-card tilt reveal";
-      card.innerHTML = `
-        <h3>${fact.title}</h3>
-        <p>${fact.text}</p>
-      `;
-      factsRoot.appendChild(card);
-      observer.observe(card);
-    });
-  }
-});
-
